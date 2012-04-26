@@ -37,6 +37,9 @@ class postfix {
   case $postfix_smtp_listen {
     "": { $postfix_smtp_listen = "127.0.0.1" }
   }
+  case $postfix_mydomain {
+    "":   { $postfix_mydomain = "${fqdn}" }
+  }
   case $root_mail_recipient {
     "":   { $root_mail_recipient = "nobody" }
   }
@@ -131,7 +134,7 @@ class postfix {
 
   # Default configuration parameters
   postfix::config {
-    "myorigin":   value => "${fqdn}";
+    "mydomain": value => "$postfix_mydomain";
     "alias_maps": value => "hash:/etc/aliases";
     "inet_interfaces": value => "all";
   }
