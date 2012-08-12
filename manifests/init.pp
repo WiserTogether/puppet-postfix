@@ -21,6 +21,9 @@ class postfix {
   case $operatingsystem {
 
     RedHat, CentOS: {
+      if !defined (Package['redhat-lsb.x86_64']) {
+        package { 'redhat-lsb.x86_64': ensure => installed }
+      }
       case $lsbmajdistrelease {
         "4":     { $postfix_seltype = "etc_t" }
         "5","6": { $postfix_seltype = "postfix_etc_t" }
