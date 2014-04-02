@@ -29,6 +29,10 @@ class postfix {
         "5","6": { $postfix_seltype = "postfix_etc_t" }
         default: { $postfix_seltype = undef }
       }
+
+      package { "cyrus-sasl-plain":
+        ensure => installed
+      }
     }
 
     default: {
@@ -66,6 +70,7 @@ class postfix {
   package { "postfix":
     ensure => installed
   }
+
 
   package { "mailx":
     ensure => installed,
